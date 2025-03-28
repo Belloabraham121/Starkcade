@@ -253,7 +253,8 @@ pub mod Coinflip {
             // Process payout
             if won {
                 let payout = self._calculate_payout(bet_amount);
-                IERC20Dispatcher { contract_address: STRK_ADDRESS() }.transfer(caller, payout);
+                let success = IERC20Dispatcher { contract_address: STRK_ADDRESS() }.transfer(caller, payout);
+                assert(success, 'Transfer failed');
             }
 
             // Clear bet
